@@ -1,0 +1,24 @@
+﻿@page "/admin"
+
+@using Services
+@inject AuthService AuthService
+
+@rendermode InteractiveServer
+
+<h3>Admin</h3>
+
+
+@if (AuthService.CurrentUser?.Role == "Admin")
+{
+    <h1>Admin Area</h1>
+}
+else
+{
+    <h1>Access Denied</h1>
+}
+
+
+
+@code {
+
+}

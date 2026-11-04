@@ -1,0 +1,24 @@
+﻿@page "/dashboard"
+@using Services
+@inject AuthService AuthService
+
+@rendermode InteractiveServer
+
+<h3>Dashboard</h3>
+
+@if (AuthService.CurrentUser != null)
+{
+    <p>Welcome @AuthService.CurrentUser.Email</p>
+    <p>Role: @AuthService.CurrentUser.Role</p>
+}
+else
+{
+    <p>No user found</p>
+}
+
+
+
+
+@code {
+
+}

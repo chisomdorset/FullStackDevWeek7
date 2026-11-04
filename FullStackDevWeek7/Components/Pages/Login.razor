@@ -1,0 +1,73 @@
+﻿@page "/login"
+@inject NavigationManager Navigation
+@using FullStackDevWeek7.Models
+@using FullStackDevWeek7.Services
+
+@inject AuthService AuthService
+
+@rendermode InteractiveServer
+
+<h3>Login</h3>
+
+<!-- Markup with Data Binding (Update your inputs): -->
+<input class="form-control" placeholder="Email" @bind="email" @bind:event="oninput" />
+<input class="form-control mt-2" placeholder="Password" @bind="password" @bind:event="oninput" type="password" />
+
+<select class="form-select" @bind="role">
+    <option>Student</option>
+    <option>Lecturer</option>
+    <option>Admin</option>
+</select>
+
+
+<!-- Real-time Output Display -->
+<div class="mt-4">
+    <p>Email: @email</p>
+    <p>Password: @password</p>
+    @* <p>Password: @(new string('*', password.Length))</p> *@
+</div>
+
+
+<button class="btn btn-success mt-2" @onclick="SignIn">
+    Login
+</button>
+
+@if (AuthService.IsLoggedIn)
+{
+    <p>Logged In</p>
+}
+
+
+
+<p>@info</p>
+
+@code {
+    private string email = "";
+    private string password = "";
+
+    private string role = "Student";
+
+    private string info;
+
+
+    private void SignIn()
+    {
+        var user = new User
+        {
+            Email = email,
+            Password = password,
+            Role = "Student"
+        };
+
+
+
+        AuthService.Login(user);
+
+        info = AuthService.CurrentUser.Email;
+
+        // Navigation.NavigateTo("/dashboard");
+
+    }
+
+}
+
