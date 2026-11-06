@@ -1,6 +1,8 @@
 ﻿@page "/dashboard"
 @using Services
 @inject AuthService AuthService
+@inject NavigationManager Navigate
+
 
 @rendermode InteractiveServer
 
@@ -10,6 +12,21 @@
 {
     <p>Welcome @AuthService.CurrentUser.Email</p>
     <p>Role: @AuthService.CurrentUser.Role</p>
+
+    
+
+    if (AuthService.CurrentUser.Role.Equals("Admin"))
+    {
+        //navigate to the Admin Dashboard
+        Navigate.NavigateTo("AdminDashboard");
+
+    }
+    else if(AuthService.CurrentUser.Role.Equals("Student"))
+    {
+        //navigate to the Student Dashboard
+
+        Navigate.NavigateTo("StudentDashboard");
+    }
 }
 else
 {

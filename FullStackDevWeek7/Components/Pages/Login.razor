@@ -24,10 +24,16 @@
 <div class="mt-4">
     <p>Email: @email</p>
     <p>Password: @password</p>
-    @* <p>Password: @(new string('*', password.Length))</p> *@
+ 
 </div>
 
 
+
+
+
+
+
+@* <p>Password: @(new string('*', password.Length))</p> *@
 <button class="btn btn-success mt-2" @onclick="SignIn">
     Login
 </button>
@@ -45,7 +51,7 @@
     private string email = "";
     private string password = "";
 
-    private string role = "Student";
+    private string role = "";
 
     private string info;
 
@@ -56,16 +62,16 @@
         {
             Email = email,
             Password = password,
-            Role = "Student"
+            Role = role
         };
 
 
 
         AuthService.Login(user);
 
-        info = AuthService.CurrentUser.Email;
+        // info = AuthService.CurrentUser.Email;
 
-        // Navigation.NavigateTo("/dashboard");
+        Navigation.NavigateTo("/dashboard");
 
     }
 
